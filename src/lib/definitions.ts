@@ -1,12 +1,18 @@
 import { z } from "zod";
 import { registerSchema } from "./schemas";
 
-export type RegisterSchema = z.infer<typeof registerSchema>;
+export type User = z.infer<typeof registerSchema>;
 
-export type RegisterFormProps = {
-	onDataAction: (data: RegisterSchema) => Promise<{
+export type RegisterProps = {
+	onRegisterAction: (
+		prevState: {
+			user?: User;
+			issues?: string[];
+		},
+		data: FormData
+	) => Promise<{
 		message: string;
-		user?: RegisterSchema;
+		user?: User;
 		issues?: string[];
 	}>;
 };
