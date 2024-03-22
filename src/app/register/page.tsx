@@ -1,11 +1,25 @@
 import RegisterForm from "@/components/forms/register-form";
-import { onRegisterAction } from "@/lib/actions";
+import {
+	Card,
+	CardHeader,
+	CardTitle,
+	CardDescription,
+	CardContent,
+} from "@/components/ui/card";
+import { registerUser } from "@/lib/actions";
 
 function RegisterPage() {
 	return (
-		<main className="max-w-lg mx-auto space-8">
-			<h1 className="text-3xl font-bold">Register</h1>
-			<RegisterForm onRegisterAction={onRegisterAction} />
+		<main className="max-w-lg mx-auto">
+			<Card>
+				<CardHeader>
+					<CardTitle>Create an account</CardTitle>
+					<CardDescription>Create an account as a new user.</CardDescription>
+				</CardHeader>
+				<CardContent>
+					<RegisterForm onRegister={registerUser} />
+				</CardContent>
+			</Card>
 		</main>
 	);
 }
