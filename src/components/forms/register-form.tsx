@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
+import { CardFooter } from "../ui/card";
+import { Separator } from "../ui/separator";
 import {
 	Form,
 	FormControl,
@@ -15,11 +17,12 @@ import {
 	FormLabel,
 	FormMessage,
 } from "../ui/form";
+import { GoalIcon } from "lucide-react";
 import { RegisterProps, User } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/schemas";
 
-function RegisterForm({ onRegisterAction }: RegisterProps) {
+function RegisterForm({ onRegister }: RegisterProps) {
 	const formRef = useRef<HTMLFormElement>(null);
 	const form = useForm<User>({
 		resolver: zodResolver(registerSchema),
@@ -27,11 +30,10 @@ function RegisterForm({ onRegisterAction }: RegisterProps) {
 			fullName: "",
 			email: "",
 			password: "",
-			// terms: true,
 		},
 	});
 
-	const [state, formAction] = useFormState(onRegisterAction, { message: "" });
+	const [state, formAction] = useFormState(onRegister, { message: "" });
 
 	return (
 		<Form {...form}>
@@ -41,7 +43,6 @@ function RegisterForm({ onRegisterAction }: RegisterProps) {
 				className="space-y-4"
 				onSubmit={() => form.handleSubmit(() => formRef?.current?.submit())}
 			>
-				<div>{state.message}</div>
 				<FormField
 					name="fullName"
 					control={form.control}
@@ -84,39 +85,56 @@ function RegisterForm({ onRegisterAction }: RegisterProps) {
 						</FormItem>
 					)}
 				/>
-				{/* <FormField
-					name="terms"
-					control={form.control}
-					render={({ field }) => (
-						<FormItem>
-							<div className="flex items-center gap-2">
-								<FormControl>
-									<Checkbox
-										checked={field.value}
-										onCheckedChange={field.onChange}
-									/>
-								</FormControl>
-								<FormLabel>Accept terms and conditions</FormLabel>
-							</div>
-							<FormMessage />
-						</FormItem>
-					)}
-				/> */}
 
 				<SubmitButton />
 			</form>
+
+			<div>
+				<div className="flex items-center gap-2 relative my-5">
+					<Separator className="shrink" />
+					<span className="text-nowrap text-sm uppercase">
+						Or continue with
+					</span>
+					<Separator className="shrink" />
+				</div>
+
+				<Button
+					type="button"
+					variant="outline"
+					className="w-full flex items-center gap-2"
+				>
+					<span>
+						<GoalIcon />
+					</span>
+					<span>Google</span>
+				</Button>
+
+				<p className="text-center text-sm text-muted-foreground mt-4 px-8">
+					By clicking continue, you agree to our Terms of Service and Privacy
+					Policy.
+				</p>
+			</div>
 		</Form>
 	);
 }
 
-function SubmitButton() {
+export function SubmitButton() {
 	const { pending } = useFormStatus();
 
 	return (
-		<Button type="submit" color="primary" disabled={pending}>
-			Register
-		</Button>
+		<CardFooter className="mt-4 p-0">
+			<Button
+				type="submit"
+				color="primary"
+				disabled={pending}
+				className="w-full"
+			>
+				Register
+			</Button>
+		</CardFooter>
 	);
 }
+
+RegisterForm.displayName = "RegisterForm";
 
 export default RegisterForm;

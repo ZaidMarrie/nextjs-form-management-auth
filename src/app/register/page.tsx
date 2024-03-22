@@ -12,9 +12,11 @@ function RegisterPage() {
 	return (
 		<main className="max-w-lg mx-auto">
 			<Card>
-				<CardHeader>
+				<CardHeader className="pb-4">
 					<CardTitle>Create an account</CardTitle>
-					<CardDescription>Create an account as a new user.</CardDescription>
+					<CardDescription>
+						Enter your details below to create an account.
+					</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<RegisterForm onRegister={registerUser} />

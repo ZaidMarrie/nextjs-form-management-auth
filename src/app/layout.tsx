@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import NavigationBar from "@/components/navigation/navigation-bar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -17,8 +19,16 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn("min-h-screen p-20", inter.variable)}>
-				{children}
+			<body className={cn("min-h-screen", inter.variable)}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<NavigationBar />
+					<div className="p-10">{children}</div>
+				</ThemeProvider>
 			</body>
 		</html>
 	);
