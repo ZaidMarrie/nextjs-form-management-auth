@@ -3,7 +3,7 @@
 import { User } from "./definitions";
 import { registerSchema } from "./schemas";
 
-export async function onRegisterAction(
+export async function registerUser(
 	prevState: {
 		user?: User;
 		issues?: string[];
@@ -17,7 +17,7 @@ export async function onRegisterAction(
 		return { message: "User registered", user: parsed.data };
 	} else {
 		return {
-			message: parsed.error.message,
+			message: "Invalid data",
 			issues: parsed.error.issues.map((issue) => issue.message),
 		};
 	}

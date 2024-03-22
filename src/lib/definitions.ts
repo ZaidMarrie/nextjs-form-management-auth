@@ -1,10 +1,12 @@
 import { z } from "zod";
 import { registerSchema } from "./schemas";
 
+// Types
 export type User = z.infer<typeof registerSchema>;
 
+// Component Prop Types
 export type RegisterProps = {
-	onRegisterAction: (
+	onRegister: (
 		prevState: {
 			user?: User;
 			issues?: string[];
