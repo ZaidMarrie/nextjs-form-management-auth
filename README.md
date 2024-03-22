@@ -1,4 +1,12 @@
+# Next.js Form Management & Auth
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Overview
+
+I built a registration and login form using Shadcn-ui and Tailwindcss. To manage these forms, I use the react-hook-form library, which allows me to easily handle validation with Zod.
+
+Forms are submitted to the server using server actions and FormData. I also create my own authentication, which I later replace with NextAuth.
 
 ## Getting Started
 
@@ -20,17 +28,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Resources
 
 To learn more about Next.js, take a look at the following resources:
 
+- [Forms Management with Next.js App Router](https://www.pronextjs.dev/tutorials/forms-management-with-next-js-app-router) - learn to implement forms in a Next.js App Router application.
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Author
 
-## Deploy on Vercel
+- Github: [@ZaidMarrie](https://github.com/ZaidMarrie)
+- Twitter: [@LeKoels27](https://twitter.com/LeKoels27)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
