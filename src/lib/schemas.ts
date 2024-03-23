@@ -11,5 +11,4 @@ export const registerSchema = z.object({
 			message:
 				"Include atleast 1 number and 1 of both a uppercase & lowercase letter",
 		}),
-	// terms: z.coerce.boolean().default(true),
 });

@@ -1,11 +1,11 @@
 "use server";
 
-import { User } from "./definitions";
+import { z } from "zod";
 import { registerSchema } from "./schemas";
 
 export async function registerUser(
 	prevState: {
-		user?: User;
+		user?: z.infer<typeof registerSchema>;
 		issues?: string[];
 	},
 	formData: FormData
