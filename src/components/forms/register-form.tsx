@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { z } from "zod";
+import { SyntheticEvent, useRef } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
-import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { CardFooter } from "../ui/card";
 import { Separator } from "../ui/separator";
@@ -18,13 +18,14 @@ import {
 	FormMessage,
 } from "../ui/form";
 import { GoalIcon } from "lucide-react";
-import { RegisterProps, User } from "@/lib/definitions";
+import { RegisterProps } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@/lib/schemas";
+import { cn } from "@/lib/utils";
 
 function RegisterForm({ onRegister }: RegisterProps) {
 	const formRef = useRef<HTMLFormElement>(null);
-	const form = useForm<User>({
+	const form = useForm<z.infer<typeof registerSchema>>({
 		resolver: zodResolver(registerSchema),
 		defaultValues: {
 			fullName: "",
@@ -41,8 +42,16 @@ function RegisterForm({ onRegister }: RegisterProps) {
 				ref={formRef}
 				action={formAction}
 				className="space-y-4"
-				onSubmit={() => form.handleSubmit(() => formRef?.current?.submit())}
+				onSubmit={form.handleSubmit(() => formRef?.current?.submit())}
 			>
+				<div
+					className={cn(
+						"text-sm",
+						state?.issues ? "text-red-600" : "text-green-400"
+					)}
+				>
+					{state.message}
+				</div>
 				<FormField
 					name="fullName"
 					control={form.control}
@@ -100,7 +109,7 @@ function RegisterForm({ onRegister }: RegisterProps) {
 
 				<Button
 					type="button"
-					variant="outline"
+					// variant="outline"
 					className="w-full flex items-center gap-2"
 				>
 					<span>
