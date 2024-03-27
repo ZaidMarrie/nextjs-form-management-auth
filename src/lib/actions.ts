@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { loginSchema, registerSchema } from "./schemas";
+import { redirect } from "next/navigation";
 
 export async function registerUser(
 	prevState: {
@@ -34,7 +35,8 @@ export async function loginUser(
 	const parsed = await loginSchema.safeParseAsync(data);
 
 	if (parsed.success) {
-		return { message: "Logged-in sucessfully", user: parsed.data };
+		// redirect("/");
+		return { message: "Login successful", user: parsed.data };
 	} else {
 		return {
 			message: "Invalid credentials",
