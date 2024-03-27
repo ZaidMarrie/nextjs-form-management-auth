@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { registerSchema } from "./schemas";
+import { loginSchema, registerSchema } from "./schemas";
 
 export async function registerUser(
 	prevState: {
@@ -18,6 +18,26 @@ export async function registerUser(
 	} else {
 		return {
 			message: "Invalid data",
+			issues: parsed.error.issues.map((issue) => issue.message),
+		};
+	}
+}
+
+export async function loginUser(
+	prevState: {
+		user?: z.infer<typeof loginSchema>;
+		issues?: string[];
+	},
+	formData: FormData
+) {
+	const data = Object.fromEntries(formData);
+	const parsed = await loginSchema.safeParseAsync(data);
+
+	if (parsed.success) {
+		return { message: "Logged-in sucessfully", user: parsed.data };
+	} else {
+		return {
+			message: "Invalid credentials",
 			issues: parsed.error.issues.map((issue) => issue.message),
 		};
 	}

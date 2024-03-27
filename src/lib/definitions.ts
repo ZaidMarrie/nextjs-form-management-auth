@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { registerSchema } from "./schemas";
+import { loginSchema, registerSchema } from "./schemas";
 
 // Types
 // export type User = z.infer<typeof registerSchema>;
@@ -15,6 +15,17 @@ export type RegisterProps = {
 	) => Promise<{
 		message: string;
 		user?: z.infer<typeof registerSchema>;
+		issues?: string[];
+	}>;
+};
+
+export type LoginProps = {
+	onLogin: (
+		prevState: { user?: z.infer<typeof loginSchema>; issues?: string[] },
+		data: FormData
+	) => Promise<{
+		message: string;
+		user?: z.infer<typeof loginSchema>;
 		issues?: string[];
 	}>;
 };
