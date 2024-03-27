@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import NavigationBar from "@/components/navigation/navigation-bar";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import NavigationBar from "@/components/navigation/navigation-bar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
 				>
 					<NavigationBar />
 					<div className="p-10">{children}</div>
+					<Toaster />
 				</ThemeProvider>
 			</body>
 		</html>
