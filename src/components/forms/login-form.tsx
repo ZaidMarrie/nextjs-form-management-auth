@@ -106,7 +106,7 @@ function LoginForm({ onLogin }: LoginProps) {
 				<p className="text-center text-sm text-muted-foreground mt-4 px-8">
 					Don&apos;t have an account?{" "}
 					<Button variant="link" className="px-2 py-0" asChild>
-						<Link href="/login">Register</Link>
+						<Link href="/register">Register</Link>
 					</Button>
 				</p>
 			</CardFooter>
