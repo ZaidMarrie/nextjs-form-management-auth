@@ -29,3 +29,12 @@ export type LoginProps = {
 		issues?: string[];
 	}>;
 };
+
+export type NavigationBarProps = {
+	session: {
+		user: z.infer<typeof loginSchema>;
+		expires: string;
+		iat: number;
+		exp: number;
+	};
+};
