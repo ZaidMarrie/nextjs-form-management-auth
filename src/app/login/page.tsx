@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import LoginForm from "@/components/forms/login-form";
 import {
 	Card,
@@ -7,8 +8,16 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { loginUser } from "@/lib/actions";
+import { getSession } from "@/lib/auth";
 
-function LoginPage() {
+async function LoginPage() {
+	const session = await getSession();
+
+	if (session) {
+		console.log(session);
+		redirect("/");
+	}
+
 	return (
 		<main className="max-w-lg mx-auto">
 			<Card>
